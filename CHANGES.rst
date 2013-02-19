@@ -5,7 +5,7 @@ CHANGES
 4.0.1 (unreleased)
 ------------------
 
-- TBD
+- Added Python 3.3 support.
 
 4.0.0 (2012-06-07)
 ------------------

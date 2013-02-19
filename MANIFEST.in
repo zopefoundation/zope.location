@@ -4,6 +4,10 @@ include *.txt
 recursive-include docs *
 recursive-include src *
 
+exclude .coverage
+exclude nosetests.xml
+exclude src/coverage.xml
+
 global-exclude *.dll
 global-exclude *.pyc
 global-exclude *.pyo
