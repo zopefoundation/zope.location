@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-4.0.1 (unreleased)
+4.0.1 (2013-02-19)
 ------------------
 
 - Added Python 3.3 support.
