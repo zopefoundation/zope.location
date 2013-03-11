@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-4.0.2 (unreleased)
+4.0.2 (2013-03-11)
 ------------------
 
 - Changed the behavior of ``LocationProxy``'s ``__setattr__()`` to correctly
