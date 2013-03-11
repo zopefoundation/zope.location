@@ -5,7 +5,10 @@ CHANGES
 4.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Changed the behavior of ``LocationProxy``'s ``__setattr__()`` to correctly
+  behave when dealing with the pure Python version of the ``ProxyBase``
+  class. Also added a test suite that fully tests the pure Python proxy
+  version of the ``LocationProxy`` class.
 
 
 4.0.1 (2013-02-19)

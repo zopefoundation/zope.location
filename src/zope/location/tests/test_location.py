@@ -366,6 +366,50 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
         self.assertEqual(list(providedBy(proxy)), [IContext, IProxy, ILocation])
 
 
+class LocationPyProxyTests(LocationProxyTests):
+
+    def setUp(self):
+        import sys
+        for mod in ('zope.location.location',
+                    'zope.proxy.decorator'):
+            try:
+                del sys.modules[mod]
+            except KeyError:
+                pass
+        import zope.proxy
+        self.orig = (zope.proxy.ProxyBase,
+                     zope.proxy.getProxiedObject,
+                     zope.proxy.setProxiedObject,
+                     zope.proxy.isProxy,
+                     zope.proxy.sameProxiedObjects,
+                     zope.proxy.queryProxy,
+                     zope.proxy.queryInnerProxy,
+                     zope.proxy.removeAllProxies,
+                     zope.proxy.non_overridable)
+        zope.proxy.ProxyBase = zope.proxy.PyProxyBase
+        zope.proxy.getProxiedObject = zope.proxy.py_getProxiedObject
+        zope.proxy.setProxiedObject = zope.proxy.py_setProxiedObject
+        zope.proxy.isProxy = zope.proxy.py_isProxy
+        zope.proxy.sameProxiedObjects = zope.proxy.py_sameProxiedObjects
+        zope.proxy.queryProxy = zope.proxy.py_queryProxy
+        zope.proxy.queryInnerProxy = zope.proxy.py_queryInnerProxy
+        zope.proxy.removeAllProxies = zope.proxy.py_removeAllProxies
+        zope.proxy.non_overridable = zope.proxy.PyNonOverridable
+
+
+    def tearDown(self):
+        import zope.proxy
+        (zope.proxy.ProxyBase,
+         zope.proxy.getProxiedObject,
+         zope.proxy.setProxiedObject,
+         zope.proxy.isProxy,
+         zope.proxy.sameProxiedObjects,
+         zope.proxy.queryProxy,
+         zope.proxy.queryInnerProxy,
+         zope.proxy.removeAllProxies,
+         zope.proxy.non_overridable) = self.orig
+
+
 def test_suite():
     return unittest.TestSuite((
         unittest.makeSuite(LocationTests),
@@ -374,5 +418,7 @@ def test_suite():
         unittest.makeSuite(Test_inside),
         unittest.makeSuite(Test_LocationIterator),
         unittest.makeSuite(ClassAndInstanceDescrTests),
+        # In case of Python-only version, tests are simply run twice.
         unittest.makeSuite(LocationProxyTests),
+        unittest.makeSuite(LocationPyProxyTests),
     ))
