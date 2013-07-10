@@ -113,9 +113,9 @@ class LocationProxy(ProxyBase):
         if name in self.__slots__ + getattr(ProxyBase, '__slots__', ()):
             #('_wrapped', '__parent__', '__name__'):
             try:
-                return ProxyBase.__setattr__(self, name, value)
-            except AttributeError: #pragma NO COVER PyPy
                 return object.__setattr__(self, name, value)
+            except TypeError: #pragma NO COVER C Optimization
+                return ProxyBase.__setattr__(self, name, value)
         return ProxyBase.__setattr__(self, name, value)
 
     @non_overridable

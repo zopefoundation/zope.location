@@ -2,10 +2,25 @@
 CHANGES
 =======
 
-4.0.1 (unreleased)
+4.0.3 (unreleased)
 ------------------
 
 - Updated ``boostrap.py`` to version 2.2.
+
+
+4.0.2 (2013-03-11)
+------------------
+
+- Changed the behavior of ``LocationProxy``'s ``__setattr__()`` to correctly
+  behave when dealing with the pure Python version of the ``ProxyBase``
+  class. Also added a test suite that fully tests the pure Python proxy
+  version of the ``LocationProxy`` class.
+
+
+4.0.1 (2013-02-19)
+------------------
+
+- Added Python 3.3 support.
 
 4.0.0 (2012-06-07)
 ------------------
