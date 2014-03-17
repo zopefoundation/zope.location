@@ -5,6 +5,8 @@ CHANGES
 4.0.3 (unreleased)
 ------------------
 
+- Added Python 3.4 support.
+
 - Updated ``boostrap.py`` to version 2.2.
 
 

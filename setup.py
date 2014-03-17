@@ -26,7 +26,7 @@ def read(*rnames):
     return text
 
 setup(name='zope.location',
-      version='4.0.3.dev0',
+      version='4.0.3dev',
       author='Zope Corporation and Contributors',
       author_email='zope-dev@zope.org',
       description='Zope Location',
@@ -49,6 +49,7 @@ setup(name='zope.location',
           'Programming Language :: Python :: 3',
           'Programming Language :: Python :: 3.2',
           'Programming Language :: Python :: 3.3',
+          'Programming Language :: Python :: 3.4',
           'Programming Language :: Python :: Implementation :: CPython',
           'Programming Language :: Python :: Implementation :: PyPy',
           'Natural Language :: English',
