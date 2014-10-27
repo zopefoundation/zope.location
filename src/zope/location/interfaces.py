@@ -88,7 +88,7 @@ class ILocationInfo(Interface):
 
         Raises a TypeError if the object is not connected to a containment
         root.
-        
+
         """
 
     def getName():
@@ -125,7 +125,7 @@ class LocationError(KeyError, LookupError):
 # Soft dependency on zope.component.
 #
 # Also, these interfaces used to be defined here directly, so this provides
-# backwardc-comppatibiltiy
+# backward-compatibility
 try:
     from zope.component.interfaces import ISite
 except ImportError: #pragma NO COVER
