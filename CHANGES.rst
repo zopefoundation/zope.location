@@ -4,7 +4,7 @@ Changes
 4.0.4 (unreleased)
 ------------------
 
-- TBD
+- Note additional documentation dependencies.
 
 
 4.0.3 (2014-03-19)
