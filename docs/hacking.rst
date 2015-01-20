@@ -219,10 +219,10 @@ as well as installing ``tox``:
 .. code-block:: sh
 
    $ tox -e py26
-   GLOB sdist-make: /home/tseaver/projects/Zope/Z3/zope.location/setup.py
-   py26 create: /home/tseaver/projects/Zope/Z3/zope.location/.tox/py26
+   GLOB sdist-make: /home/jrandom/projects/Zope/Z3/zope.location/setup.py
+   py26 create: /home/jrandom/projects/Zope/Z3/zope.location/.tox/py26
    py26 installdeps: zope.configuration, zope.copy, zope.interface, zope.proxy, zope.schema
-   py26 inst: /home/tseaver/projects/Zope/Z3/zope.location/.tox/dist/zope.location-4.0.4.dev0.zip
+   py26 inst: /home/jrandom/projects/Zope/Z3/zope.location/.tox/dist/zope.location-4.0.4.dev0.zip
    py26 runtests: PYTHONHASHSEED='3489368878'
    py26 runtests: commands[0] | python setup.py test -q
    running test
