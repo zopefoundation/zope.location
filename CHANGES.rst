@@ -4,6 +4,8 @@ Changes
 4.0.4 (unreleased)
 ------------------
 
+- Add a page to the docs on hacking ``zope.location``.
+
 - Note additional documentation dependencies.
 
 
