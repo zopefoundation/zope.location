@@ -1,7 +1,7 @@
 ``zope.location``
 =================
 
-.. image:: https://pypip.in/version/zope.location/badge.svg?style=flat
+.. image:: https://img.shields.io/pypi/v/zope.location.svg
     :target: https://pypi.python.org/pypi/zope.location/
     :alt: Latest Version
 

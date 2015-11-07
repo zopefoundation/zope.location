@@ -8,6 +8,8 @@ Changes
 
 - Note additional documentation dependencies.
 
+- Claim support for Python 3.5.
+
 
 4.0.3 (2014-03-19)
 ------------------
