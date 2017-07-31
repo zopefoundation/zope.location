@@ -20,7 +20,6 @@ from zope.interface import implementer
 from zope.location.interfaces import ILocationInfo
 from zope.location.interfaces import IRoot
 from zope.location.interfaces import ISite # zope.component, if present
-from zope.location._compat import u
 
 
 @implementer(ILocationInfo)
@@ -57,9 +56,8 @@ class LocationPhysicallyLocatable(object):
                 if path:
                     path.append('')
                     path.reverse()
-                    return u('/').join(path)
-                else:
-                    return u('/')
+                    return u'/'.join(path)
+                return u'/'
             path.append(context.__name__)
             context = context.__parent__
             max -= 1
@@ -115,7 +113,7 @@ class LocationPhysicallyLocatable(object):
 @implementer(ILocationInfo)
 class RootPhysicallyLocatable(object):
     """Provide location information for the root object
-    
+
     This adapter is very simple, because there's no places to search
     for parents and nearest sites, so we are only working with context
     object, knowing that its the root object already.
@@ -131,7 +129,7 @@ class RootPhysicallyLocatable(object):
     def getPath(self):
         """See ILocationInfo
         """
-        return u('/')
+        return u'/'
 
     def getParent(self):
         """See ILocationInfo.
@@ -146,7 +144,7 @@ class RootPhysicallyLocatable(object):
     def getName(self):
         """See ILocationInfo
         """
-        return u('')
+        return u''
 
     def getNearestSite(self):
         """See ILocationInfo

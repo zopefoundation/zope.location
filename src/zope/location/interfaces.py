@@ -19,7 +19,6 @@ from zope.interface import Interface
 from zope.interface import Attribute
 from zope.schema import TextLine
 
-from zope.location._compat import u
 
 class ILocation(Interface):
     """Objects that can be located in a hierachy.
@@ -42,9 +41,9 @@ class ILocation(Interface):
     __parent__ = Attribute("The parent in the location hierarchy.")
 
     __name__ = TextLine(
-        title=u("The name within the parent"),
-        description=u("The object can be looked up from the parent's "
-            "sublocations using this name."),
+        title=(u"The name within the parent"),
+        description=(u"The object can be looked up from the parent's "
+                     u"sublocations using this name."),
         required=False,
         default=None)
 
@@ -128,6 +127,6 @@ class LocationError(KeyError, LookupError):
 # backward-compatibility
 try:
     from zope.component.interfaces import ISite
-except ImportError: #pragma NO COVER
+except ImportError: # pragma: no cover
     class ISite(Interface):
         pass

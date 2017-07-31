@@ -18,29 +18,20 @@ import unittest
 class Test_ZCML_loads(unittest.TestCase):
 
     def test_it(self):
-        try:
-            import zope.component # no registrations made if not present
-        except ImportError:
-            ADAPTERS_REGISTERED = 0
-        else:
-            ADAPTERS_REGISTERED = 4
-        try:
-            from zope.configuration.xmlconfig import _clearContext
-            from zope.configuration.xmlconfig import _getContext
-            from zope.configuration.xmlconfig import XMLConfig
-        except ImportError:
-            pass
-        else:
-            import zope.location
-            _clearContext()
-            context = _getContext()
-            XMLConfig('configure.zcml', zope.location)
-            adapters = ([x for x in context.actions
-                            if x['discriminator'] is not None])
-            self.assertEqual(len(adapters), ADAPTERS_REGISTERED)
-        
+        import zope.component # no registrations made if not present
+        ADAPTERS_REGISTERED = 4
+        from zope.configuration.xmlconfig import _clearContext
+        from zope.configuration.xmlconfig import _getContext
+        from zope.configuration.xmlconfig import XMLConfig
+        import zope.location
+
+        _clearContext()
+        context = _getContext()
+        XMLConfig('configure.zcml', zope.location)
+        adapters = ([x for x in context.actions
+                     if x['discriminator'] is not None])
+        self.assertEqual(len(adapters), ADAPTERS_REGISTERED)
+
 
 def test_suite():
-    return unittest.TestSuite((
-        unittest.makeSuite(Test_ZCML_loads),
-    ))
+    return unittest.defaultTestLoader.loadTestsFromName(__name__)

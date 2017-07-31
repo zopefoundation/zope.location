@@ -57,7 +57,7 @@
 .. automodule:: zope.location.traversing
 
    .. autoclass:: LocationPhysicallyLocatable
-    
+
       .. doctest::
 
          >>> from zope.interface.verify import verifyObject
@@ -124,16 +124,16 @@
             >>> from zope.location.traversing import LocationPhysicallyLocatable
             >>> root = Location()
             >>> directlyProvides(root, IRoot)
-            >>> LocationPhysicallyLocatable(root).getPath()
-            u'/'
+            >>> print(LocationPhysicallyLocatable(root).getPath())
+            /
 
             >>> o1 = Location(); o1.__parent__ = root; o1.__name__ = 'o1'
-            >>> LocationPhysicallyLocatable(o1).getPath()
-            u'/o1'
+            >>> print(LocationPhysicallyLocatable(o1).getPath())
+            /o1
 
             >>> o2 = Location(); o2.__parent__ = o1; o2.__name__ = u'o2'
-            >>> LocationPhysicallyLocatable(o2).getPath()
-            u'/o1/o2'
+            >>> print(LocationPhysicallyLocatable(o2).getPath())
+            /o1/o2
 
          It is an error to get the path of a rootless location:
 
@@ -203,10 +203,10 @@
             >>> o2.__parent__ = o1
             >>> LocationPhysicallyLocatable(o2).getParents() == [o1, root]
             True
-            
+
             If the last parent is not an IRoot object, TypeError will be
             raised as statet before.
-            
+
             >>> noLongerProvides(root, IRoot)
             >>> LocationPhysicallyLocatable(o2).getParents()
             Traceback (most recent call last):
@@ -220,8 +220,8 @@
             >>> from zope.location.location import Location
             >>> from zope.location.traversing import LocationPhysicallyLocatable
             >>> o1 = Location(); o1.__name__ = u'o1'
-            >>> LocationPhysicallyLocatable(o1).getName()
-            u'o1'
+            >>> print(LocationPhysicallyLocatable(o1).getName())
+            o1
 
       .. automethod:: getNearestSite
 
@@ -246,18 +246,18 @@
             >>> o1.__parent__ = root
             >>> LocationPhysicallyLocatable(o1).getNearestSite() is root
             True
-            
+
             >>> directlyProvides(o1, ISite)
             >>> LocationPhysicallyLocatable(o1).getNearestSite() is o1
             True
-            
+
             >>> o2 = Location()
             >>> o2.__parent__ = o1
             >>> LocationPhysicallyLocatable(o2).getNearestSite() is o1
             True
 
    .. autoclass:: RootPhysicallyLocatable
-    
+
       .. doctest::
 
          >>> from zope.interface.verify import verifyObject
@@ -269,7 +269,7 @@
 
       .. automethod:: getRoot
 
-         No need to search for root when our context is already root :) 
+         No need to search for root when our context is already root :)
 
          .. doctest::
 
@@ -280,14 +280,14 @@
 
       .. automethod:: getPath
 
-         Root object is at the top of the tree, so always return ``/``. 
+         Root object is at the top of the tree, so always return ``/``.
 
          .. doctest::
 
             >>> from zope.location.traversing import RootPhysicallyLocatable
             >>> o1 = object()
-            >>> RootPhysicallyLocatable(o1).getPath()
-            u'/'
+            >>> print(RootPhysicallyLocatable(o1).getPath())
+            /
 
       .. automethod:: getParent
 
@@ -321,11 +321,11 @@
 
             >>> from zope.location.traversing import RootPhysicallyLocatable
             >>> o1 = object()
-            >>> RootPhysicallyLocatable(o1).getName()
-            u''
+            >>> RootPhysicallyLocatable(o1).getName() == u''
+            True
 
       .. automethod:: getNearestSite
- 
+
          Return object itself as the nearest site, because there's no
          other place to look for. It's also usual that the root is the
          site as well.
