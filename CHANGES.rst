@@ -1,20 +1,22 @@
-Changes
-=======
+=========
+ Changes
+=========
 
 4.1.0 (unreleased)
-------------------
+==================
 
-- Drop support for Python 2.6 and 3.2.
+- Drop support for Python 2.6, 3.2 and 3.3.
 
 - Add a page to the docs on hacking ``zope.location``.
 
 - Note additional documentation dependencies.
 
-- Add support for Python 3.5.
+- Add support for Python 3.5 and 3.6.
 
+- Remove internal ``_compat`` implementation module.
 
 4.0.3 (2014-03-19)
-------------------
+==================
 
 - Add Python 3.4 support.
 
@@ -22,7 +24,7 @@ Changes
 
 
 4.0.2 (2013-03-11)
-------------------
+==================
 
 - Change the behavior of ``LocationProxy``'s ``__setattr__()`` to correctly
   behave when dealing with the pure Python version of the ``ProxyBase``
@@ -31,12 +33,12 @@ Changes
 
 
 4.0.1 (2013-02-19)
-------------------
+==================
 
 - Add Python 3.3 support.
 
 4.0.0 (2012-06-07)
-------------------
+==================
 
 - Remove backward-compatibility imports:
 
@@ -78,24 +80,24 @@ Changes
 
 
 3.9.1 (2011-08-22)
-------------------
+==================
 
 - Add zcml extra as well as a test for configure.zcml.
 
 
 3.9.0 (2009-12-29)
-------------------
+==================
 
 - Move LocationCopyHook related tests to zope.copy and remove a test
   dependency on that package.
 
 3.8.2 (2009-12-23)
-------------------
+==================
 
 - Fix a typo in the configure.zcml.
 
 3.8.1 (2009-12-23)
-------------------
+==================
 
 - Remove dependency on zope.copy: the LocationCopyHook adapter is registered
   only if zope.copy is available.
@@ -104,18 +106,18 @@ Changes
   has been deprecated.
 
 3.8.0 (2009-12-22)
-------------------
+==================
 
 - Adjust to testing output caused by new zope.schema.
 
 3.7.1 (2009-11-18)
-------------------
+==================
 
 - Move the IPossibleSite and ISite interfaces to zope.component as they are
   dealing with zope.component's concept of a site, but not with location.
 
 3.7.0 (2009-09-29)
-------------------
+==================
 
 - Add getParent() to ILocationInfo and moved the actual implementation here
   from zope.traversal.api, analogous to getParents().
@@ -128,7 +130,7 @@ Changes
   interdependency but is no longer used here.
 
 3.6.0 (2009-08-27)
-------------------
+==================
 
 - New feature release: deprecate locationCopy, CopyPersistent and
   PathPersistent from zope.location.pickling. These changes were already part
@@ -138,13 +140,13 @@ Changes
   without using it.
 
 3.5.5 (2009-08-15)
-------------------
+==================
 
 - Add zope.deferredimport as a dependency as it's used directly by
   zope.location.pickling.
 
 3.5.4 (2009-05-17)
-------------------
+==================
 
 - Add ``IContained`` interface to ``zope.location.interfaces`` module.
   This interface was moved from ``zope.container`` (after
@@ -153,22 +155,22 @@ Changes
   dependency cycles.
 
 3.5.3 (2009-02-09)
-------------------
+==================
 
 - Use new zope.copy package for implementing location copying. Thus
   there's changes in the ``zope.locaton.pickling`` module:
-  
+
    * The ``locationCopy`` and ``CopyPersistent`` was removed in prefer
      to their equivalents in zope.copy. Deprecated backward-compatibility
      imports provided.
-   
+
    * The module now provides a ``zope.copy.interfaces.ICopyHook`` adapter
      for ``ILocation`` objects that replaces the old CopyPersistent
      functionality of checking for the need to clone objects based on
      their location.
 
 3.5.2 (2009-02-04)
-------------------
+==================
 
 - Split RootPhysicallyLocatable adapter back from LocationPhysicallyLocatable,
   because the IRoot object may not always provide ILocation and the code
@@ -177,7 +179,7 @@ Changes
   below with ``getParents`` method added (returns an empty list).
 
 3.5.1 (2009-02-02)
-------------------
+==================
 
 - Improve test coverage.
 
@@ -197,12 +199,12 @@ Changes
   of retired zope3-dev at zope.org.
 
 3.5.0 (2009-01-31)
-------------------
+==================
 
 - Reverse the dependency between zope.location and zope.traversing. This
   also causes the dependency to various other packages go away.
 
 3.4.0 (2007-10-02)
-------------------
+==================
 
 - Initial release independent of the main Zope tree.

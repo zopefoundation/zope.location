@@ -20,9 +20,9 @@ from zope.location.location import inside
 
 try:
     from zope.copy.interfaces import ICopyHook, ResumeCopy
-except ImportError: #pragma NO COVER
+except ImportError: # pragma: no cover
     raise NotImplementedError("zope.location.pickling is not supported "
-        "because zope.copy is not available")
+                              "because zope.copy is not available")
 
 
 @implementer(ICopyHook)
@@ -32,7 +32,7 @@ class LocationCopyHook(object):
     """
     def __init__(self, context):
         self.context = context
-    
+
     def __call__(self, toplevel, register):
         if not inside(self.context, toplevel):
             return self.context

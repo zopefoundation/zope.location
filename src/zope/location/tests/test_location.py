@@ -244,11 +244,9 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
         if obj is None:
             obj = object()
         if container is _MARKER:
-            if name is _MARKER:
-                return self._getTargetClass()(obj)
-            return self._getTargetClass()(obj, name=name)
-        if name is _MARKER:
-            return self._getTargetClass()(obj, container)
+            self.assertIs(name, _MARKER)
+            return self._getTargetClass()(obj)
+        self.assertIsNot(name, _MARKER)
         return self._getTargetClass()(obj, container, name)
 
     def test_ctor_defaults(self):
@@ -287,8 +285,6 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
 
     def test___doc___from_target_class(self):
         klass = self._getTargetClass()
-        class Derived(klass):
-            """DERIVED"""
         class Context(object):
             """CONTEXT"""
         proxy = self._makeOne(Context())
@@ -296,8 +292,6 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
 
     def test___doc___from_target_instance(self):
         klass = self._getTargetClass()
-        class Derived(klass):
-            """DERIVED"""
         class Context(object):
             """CONTEXT"""
         context = Context()
@@ -317,7 +311,7 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
         import pickle
         class Context(object):
             def __reduce__(self):
-                return {'a': 1}
+                raise AssertionError("This is not called")
         proxy = self._makeOne(Context())
         # XXX: this TypeError is not due to LocationProxy.__reduce__:
         #      it's descriptor (under pure Python) isn't begin triggered
@@ -374,7 +368,7 @@ class LocationPyProxyTests(LocationProxyTests):
                     'zope.proxy.decorator'):
             try:
                 del sys.modules[mod]
-            except KeyError:
+            except KeyError: # pragma: no cover
                 pass
         import zope.proxy
         self.orig = (zope.proxy.ProxyBase,
@@ -411,14 +405,4 @@ class LocationPyProxyTests(LocationProxyTests):
 
 
 def test_suite():
-    return unittest.TestSuite((
-        unittest.makeSuite(LocationTests),
-        unittest.makeSuite(Test_locate),
-        unittest.makeSuite(Test_located),
-        unittest.makeSuite(Test_inside),
-        unittest.makeSuite(Test_LocationIterator),
-        unittest.makeSuite(ClassAndInstanceDescrTests),
-        # In case of Python-only version, tests are simply run twice.
-        unittest.makeSuite(LocationProxyTests),
-        unittest.makeSuite(LocationPyProxyTests),
-    ))
+    return unittest.defaultTestLoader.loadTestsFromName(__name__)
