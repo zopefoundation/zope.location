@@ -36,7 +36,7 @@ Usage within an Object field:
   >>> a.location = loc
   Traceback (most recent call last):
   ...
-  WrongContainedType: ([WrongType('foo', <type 'unicode'>, '__name__')], 'location')
+  SchemaNotCorrectlyImplemented: ([WrongType('foo', <type 'unicode'>, '__name__')], 'location')
 
 
 :func:`~zope.location.location.inside`
