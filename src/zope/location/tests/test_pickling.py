@@ -14,8 +14,6 @@
 import unittest
 
 
-import zope.copy
-
 class LocationCopyHookTests(unittest.TestCase):
 
     def _getTargetClass(self):
@@ -28,17 +26,18 @@ class LocationCopyHookTests(unittest.TestCase):
         return self._getTargetClass()(obj)
 
     def test_class_conforms_to_ICopyHook(self):
-        from zope.interface.verify import verifyClass
         from zope.copy.interfaces import ICopyHook
+        from zope.interface.verify import verifyClass
         verifyClass(ICopyHook, self._getTargetClass())
 
     def test_instance_conforms_to_ICopyHook(self):
-        from zope.interface.verify import verifyObject
         from zope.copy.interfaces import ICopyHook
+        from zope.interface.verify import verifyObject
         verifyObject(ICopyHook, self._makeOne())
 
     def test___call___w_context_inside_toplevel(self):
         from zope.copy.interfaces import ResumeCopy
+
         class Dummy(object):
             __parent__ = __name__ = None
         top_level = Dummy()
@@ -54,7 +53,6 @@ class LocationCopyHookTests(unittest.TestCase):
         context = Dummy()
         hook = self._makeOne(context)
         self.assertTrue(hook(top_level, object()) is context)
-
 
 
 def test_suite():

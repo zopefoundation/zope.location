@@ -19,13 +19,14 @@ from zope.interface import implementer
 
 from zope.location.interfaces import ILocationInfo
 from zope.location.interfaces import IRoot
-from zope.location.interfaces import ISite # zope.component, if present
+from zope.location.interfaces import ISite  # zope.component, if present
 
 
 @implementer(ILocationInfo)
 class LocationPhysicallyLocatable(object):
     """Provide location information for location objects
     """
+
     def __init__(self, context):
         self.context = context
 
@@ -84,7 +85,7 @@ class LocationPhysicallyLocatable(object):
         # from zope.traversing.
         parents = []
         w = self.context
-        while 1:
+        while True:
             w = getattr(w, '__parent__', None)
             if w is None:
                 break
@@ -110,6 +111,7 @@ class LocationPhysicallyLocatable(object):
                 return parent
         return self.getRoot()
 
+
 @implementer(ILocationInfo)
 class RootPhysicallyLocatable(object):
     """Provide location information for the root object
@@ -118,6 +120,7 @@ class RootPhysicallyLocatable(object):
     for parents and nearest sites, so we are only working with context
     object, knowing that its the root object already.
     """
+
     def __init__(self, context):
         self.context = context
 

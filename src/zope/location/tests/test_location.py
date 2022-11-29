@@ -18,11 +18,13 @@ class ConformsToILocation(object):
 
     def test_class_conforms_to_ILocation(self):
         from zope.interface.verify import verifyClass
+
         from zope.location.interfaces import ILocation
         verifyClass(ILocation, self._getTargetClass())
 
     def test_instance_conforms_to_ILocation(self):
         from zope.interface.verify import verifyObject
+
         from zope.location.interfaces import ILocation
         verifyObject(ILocation, self._makeOne())
 
@@ -75,7 +77,9 @@ class Test_located(unittest.TestCase):
 
     def test_wo_name_obj_implements_ILocation(self):
         from zope.interface import implementer
+
         from zope.location.interfaces import ILocation
+
         @implementer(ILocation)
         class Dummy(object):
             __parent__ = None
@@ -88,11 +92,14 @@ class Test_located(unittest.TestCase):
 
     def test_w_name_adaptable_to_ILocation(self):
         from zope.interface.interface import adapter_hooks
+
         from zope.location.interfaces import ILocation
         _hooked = []
+
         def _hook(iface, obj):
             _hooked.append((iface, obj))
             return obj
+
         class Dummy(object):
             pass
         parent = Dummy()
@@ -206,13 +213,16 @@ class ClassAndInstanceDescrTests(unittest.TestCase):
 
     def _makeScaffold(self):
         _inst_called = []
+
         def _inst(*args, **kw):
             _inst_called.append((args, kw))
             return 'INST'
         _class_called = []
+
         def _class(*args, **kw):
             _class_called.append((args, kw))
             return 'CLASS'
+
         class Foo(object):
             descr = self._makeOne(_inst, _class)
         return Foo, _class_called, _inst_called
@@ -220,7 +230,7 @@ class ClassAndInstanceDescrTests(unittest.TestCase):
     def test_fetched_from_class(self):
         Foo, _class_called, _inst_called = self._makeScaffold()
         self.assertEqual(Foo.descr, 'CLASS')
-        self.assertEqual(_class_called, [((Foo,),{})])
+        self.assertEqual(_class_called, [((Foo,), {})])
         self.assertEqual(_inst_called, [])
 
     def test_fetched_from_instance(self):
@@ -228,7 +238,7 @@ class ClassAndInstanceDescrTests(unittest.TestCase):
         foo = Foo()
         self.assertEqual(foo.descr, 'INST')
         self.assertEqual(_class_called, [])
-        self.assertEqual(_inst_called, [((foo,),{})])
+        self.assertEqual(_inst_called, [((foo,), {})])
 
 
 _MARKER = object()
@@ -250,13 +260,13 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
         return self._getTargetClass()(obj, container, name)
 
     def test_ctor_defaults(self):
-        dummy = object() # can't setattr
+        dummy = object()  # can't setattr
         proxy = self._makeOne(dummy)
         self.assertEqual(proxy.__parent__, None)
         self.assertEqual(proxy.__name__, None)
 
     def test_ctor_explicit(self):
-        dummy = object() # can't setattr
+        dummy = object()  # can't setattr
         parent = object()
         proxy = self._makeOne(dummy, parent, 'name')
         self.assertTrue(proxy.__parent__ is parent)
@@ -279,19 +289,18 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
 
     def test___doc___from_derived_class(self):
         klass = self._getTargetClass()
+
         class Derived(klass):
             """DERIVED"""
         self.assertEqual(Derived.__doc__, 'DERIVED')
 
     def test___doc___from_target_class(self):
-        klass = self._getTargetClass()
         class Context(object):
             """CONTEXT"""
         proxy = self._makeOne(Context())
         self.assertEqual(proxy.__doc__, 'CONTEXT')
 
     def test___doc___from_target_instance(self):
-        klass = self._getTargetClass()
         class Context(object):
             """CONTEXT"""
         context = Context()
@@ -309,6 +318,7 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
 
     def test___reduce___via_pickling(self):
         import pickle
+
         class Context(object):
             def __reduce__(self):
                 raise AssertionError("This is not called")
@@ -323,10 +333,13 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
         from zope.interface import implementer
         from zope.interface import providedBy
         from zope.interface import provider
+
         class IProxyFactory(Interface):
             pass
+
         class IProxy(Interface):
             pass
+
         @provider(IProxyFactory)
         @implementer(IProxy)
         class Foo(self._getTargetClass()):
@@ -338,26 +351,34 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
         from zope.interface import implementer
         from zope.interface import providedBy
         from zope.interface import provider
+
         from zope.location.interfaces import ILocation
+
         class IProxyFactory(Interface):
             pass
+
         class IProxy(Interface):
             pass
+
         class IContextFactory(Interface):
             pass
+
         class IContext(Interface):
             pass
+
         @provider(IProxyFactory)
         @implementer(IProxy)
         class Proxy(self._getTargetClass()):
             pass
+
         @provider(IContextFactory)
         @implementer(IContext)
         class Context(object):
             pass
         context = Context()
         proxy = Proxy(context)
-        self.assertEqual(list(providedBy(proxy)), [IContext, IProxy, ILocation])
+        self.assertEqual(list(providedBy(proxy)), [
+                         IContext, IProxy, ILocation])
 
 
 class LocationPyProxyTests(LocationProxyTests):
@@ -368,7 +389,7 @@ class LocationPyProxyTests(LocationProxyTests):
                     'zope.proxy.decorator'):
             try:
                 del sys.modules[mod]
-            except KeyError: # pragma: no cover
+            except KeyError:  # pragma: no cover
                 pass
         import zope.proxy
         self.orig = (zope.proxy.ProxyBase,
@@ -389,7 +410,6 @@ class LocationPyProxyTests(LocationProxyTests):
         zope.proxy.queryInnerProxy = zope.proxy.py_queryInnerProxy
         zope.proxy.removeAllProxies = zope.proxy.py_removeAllProxies
         zope.proxy.non_overridable = zope.proxy.PyNonOverridable
-
 
     def tearDown(self):
         import zope.proxy

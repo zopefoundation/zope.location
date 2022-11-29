@@ -16,5 +16,8 @@
 __docformat__ = 'restructuredtext'
 
 from zope.location.interfaces import ILocation
-from zope.location.location import Location, locate, LocationIterator
-from zope.location.location import inside, LocationProxy
+from zope.location.location import Location
+from zope.location.location import LocationIterator
+from zope.location.location import LocationProxy
+from zope.location.location import inside
+from zope.location.location import locate
