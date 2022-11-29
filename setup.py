@@ -48,7 +48,7 @@ DOCS_REQUIRE = [
 ] + ZCML_REQUIRES + COMPONENT_REQUIRES  # doctest snippets need these
 
 setup(name='zope.location',
-      version='4.3',
+      version='4.4.dev0',
       author='Zope Corporation and Contributors',
       author_email='zope-dev@zope.org',
       description='Zope Location',
