@@ -23,6 +23,7 @@ from zope.proxy.decorator import DecoratorSpecificationDescriptor
 
 from zope.location.interfaces import ILocation
 
+
 @implementer(ILocation)
 class Location(object):
     """Mix-in that implements ILocation.
@@ -70,6 +71,7 @@ def inside(l1, l2):
         l1 = getattr(l1, '__parent__', None)
     return False
 
+
 class ClassAndInstanceDescr(object):
 
     def __init__(self, *args):
@@ -93,8 +95,8 @@ class LocationProxy(ProxyBase):
 
     __doc__ = ClassAndInstanceDescr(
         lambda inst: getProxiedObject(inst).__doc__,
-        lambda cls, __doc__ = __doc__: __doc__,
-        )
+        lambda cls, __doc__=__doc__: __doc__,
+    )
 
     def __new__(self, ob, container=None, name=None):
         return ProxyBase.__new__(self, ob)
@@ -111,10 +113,10 @@ class LocationProxy(ProxyBase):
 
     def __setattr__(self, name, value):
         if name in self.__slots__ + getattr(ProxyBase, '__slots__', ()):
-            #('_wrapped', '__parent__', '__name__'):
+            # ('_wrapped', '__parent__', '__name__'):
             try:
                 return object.__setattr__(self, name, value)
-            except TypeError: #pragma NO COVER C Optimization
+            except TypeError:  # pragma NO COVER C Optimization
                 return ProxyBase.__setattr__(self, name, value)
         return ProxyBase.__setattr__(self, name, value)
 

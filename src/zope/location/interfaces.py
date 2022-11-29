@@ -15,8 +15,8 @@
 """
 __docformat__ = 'restructuredtext'
 
-from zope.interface import Interface
 from zope.interface import Attribute
+from zope.interface import Interface
 from zope.schema import TextLine
 
 
@@ -52,8 +52,10 @@ class ILocation(Interface):
 # used within this package, but is depended upon by external
 # consumers.
 
+
 class IContained(ILocation):
     """Objects contained in containers."""
+
 
 class ILocationInfo(Interface):
     """Provides supplemental information for located objects.
@@ -121,12 +123,13 @@ class IRoot(Interface):
 class LocationError(KeyError, LookupError):
     """There is no object for a given location."""
 
+
 # Soft dependency on zope.component.
 #
 # Also, these interfaces used to be defined here directly, so this provides
 # backward-compatibility
 try:
     from zope.component.interfaces import ISite
-except ImportError: # pragma: no cover
+except ImportError:  # pragma: no cover
     class ISite(Interface):
         pass

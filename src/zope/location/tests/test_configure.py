@@ -15,14 +15,16 @@
 """
 import unittest
 
+
 class Test_ZCML_loads(unittest.TestCase):
 
     def test_it(self):
-        import zope.component # no registrations made if not present
+        import zope.component  # no registrations made if not present
         ADAPTERS_REGISTERED = 4
+        from zope.configuration.xmlconfig import XMLConfig
         from zope.configuration.xmlconfig import _clearContext
         from zope.configuration.xmlconfig import _getContext
-        from zope.configuration.xmlconfig import XMLConfig
+
         import zope.location
 
         _clearContext()

@@ -18,17 +18,19 @@ class ConformsToILocationInfo(object):
 
     def test_class_conforms_to_ILocationInfo(self):
         from zope.interface.verify import verifyClass
+
         from zope.location.interfaces import ILocationInfo
         verifyClass(ILocationInfo, self._getTargetClass())
 
     def test_instance_conforms_to_ILocationInfo(self):
         from zope.interface.verify import verifyObject
+
         from zope.location.interfaces import ILocationInfo
         verifyObject(ILocationInfo, self._makeOne())
 
 
 class LocationPhysicallyLocatableTests(
-                    unittest.TestCase, ConformsToILocationInfo):
+        unittest.TestCase, ConformsToILocationInfo):
 
     def _getTargetClass(self):
         from zope.location.traversing import LocationPhysicallyLocatable
@@ -51,7 +53,9 @@ class LocationPhysicallyLocatableTests(
 
     def test_getRoot_wo_cycle(self):
         from zope.interface import directlyProvides
+
         from zope.location.interfaces import IRoot
+
         class Dummy(object):
             __parent__ = None
         one = Dummy()
@@ -87,7 +91,9 @@ class LocationPhysicallyLocatableTests(
 
     def test_getPath_at_root(self):
         from zope.interface import directlyProvides
+
         from zope.location.interfaces import IRoot
+
         class Dummy(object):
             __parent__ = __name__ = None
         one = Dummy()
@@ -97,7 +103,9 @@ class LocationPhysicallyLocatableTests(
 
     def test_getPath_wo_cycle(self):
         from zope.interface import directlyProvides
+
         from zope.location.interfaces import IRoot
+
         class Dummy(object):
             __parent__ = __name__ = None
         one = Dummy()
@@ -137,7 +145,9 @@ class LocationPhysicallyLocatableTests(
 
     def test_getParent_at_root(self):
         from zope.interface import directlyProvides
+
         from zope.location.interfaces import IRoot
+
         class Dummy(object):
             __parent__ = __name__ = None
         one = Dummy()
@@ -147,7 +157,9 @@ class LocationPhysicallyLocatableTests(
 
     def test_getParent_wo_cycle(self):
         from zope.interface import directlyProvides
+
         from zope.location.interfaces import IRoot
+
         class Dummy(object):
             __parent__ = __name__ = None
         one = Dummy()
@@ -173,7 +185,9 @@ class LocationPhysicallyLocatableTests(
 
     def test_getParents_at_root(self):
         from zope.interface import directlyProvides
+
         from zope.location.interfaces import IRoot
+
         class Dummy(object):
             __parent__ = __name__ = None
         one = Dummy()
@@ -183,7 +197,9 @@ class LocationPhysicallyLocatableTests(
 
     def test_getParents_wo_cycle(self):
         from zope.interface import directlyProvides
+
         from zope.location.interfaces import IRoot
+
         class Dummy(object):
             __parent__ = __name__ = None
         one = Dummy()
@@ -214,8 +230,11 @@ class LocationPhysicallyLocatableTests(
         self.assertEqual(proxy.getName(), 'name')
 
     def test_getNearestSite_context_is_site(self):
-        from zope.location.interfaces import ISite # zope.component, if present
         from zope.interface import directlyProvides
+
+        from zope.location.interfaces import \
+            ISite  # zope.component, if present
+
         class Dummy(object):
             pass
         context = Dummy()
@@ -224,9 +243,12 @@ class LocationPhysicallyLocatableTests(
         self.assertTrue(proxy.getNearestSite() is context)
 
     def test_getNearestSite_ancestor_is_site(self):
-        from zope.location.interfaces import ISite # zope.component, if present
         from zope.interface import directlyProvides
+
         from zope.location.interfaces import IRoot
+        from zope.location.interfaces import \
+            ISite  # zope.component, if present
+
         class Dummy(object):
             pass
         one = Dummy()
@@ -242,7 +264,9 @@ class LocationPhysicallyLocatableTests(
 
     def test_getNearestSite_no_site(self):
         from zope.interface import directlyProvides
+
         from zope.location.interfaces import IRoot
+
         class Dummy(object):
             __parent__ = __name__ = None
         one = Dummy()
@@ -258,7 +282,7 @@ class LocationPhysicallyLocatableTests(
 
 
 class RootPhysicallyLocatableTests(
-                    unittest.TestCase, ConformsToILocationInfo):
+        unittest.TestCase, ConformsToILocationInfo):
 
     def _getTargetClass(self):
         from zope.location.traversing import RootPhysicallyLocatable
