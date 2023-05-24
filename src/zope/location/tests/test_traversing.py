@@ -14,7 +14,7 @@
 import unittest
 
 
-class ConformsToILocationInfo(object):
+class ConformsToILocationInfo:
 
     def test_class_conforms_to_ILocationInfo(self):
         from zope.interface.verify import verifyClass
@@ -46,7 +46,7 @@ class LocationPhysicallyLocatableTests(
         self.assertRaises(AttributeError, proxy.getRoot)
 
     def test_getRoot_location_but_no_IRoot(self):
-        class Dummy(object):
+        class Dummy:
             __parent__ = None
         proxy = self._makeOne(Dummy())
         self.assertRaises(TypeError, proxy.getRoot)
@@ -56,7 +56,7 @@ class LocationPhysicallyLocatableTests(
 
         from zope.location.interfaces import IRoot
 
-        class Dummy(object):
+        class Dummy:
             __parent__ = None
         one = Dummy()
         directlyProvides(one, IRoot)
@@ -68,7 +68,7 @@ class LocationPhysicallyLocatableTests(
         self.assertTrue(proxy.getRoot() is one)
 
     def test_getRoot_w_cycle(self):
-        class Dummy(object):
+        class Dummy:
             __parent__ = None
         one = Dummy()
         two = Dummy()
@@ -84,7 +84,7 @@ class LocationPhysicallyLocatableTests(
         self.assertRaises(AttributeError, proxy.getPath)
 
     def test_getPath_location_but_no_IRoot(self):
-        class Dummy(object):
+        class Dummy:
             __parent__ = __name__ = None
         proxy = self._makeOne(Dummy())
         self.assertRaises(TypeError, proxy.getPath)
@@ -94,7 +94,7 @@ class LocationPhysicallyLocatableTests(
 
         from zope.location.interfaces import IRoot
 
-        class Dummy(object):
+        class Dummy:
             __parent__ = __name__ = None
         one = Dummy()
         directlyProvides(one, IRoot)
@@ -106,7 +106,7 @@ class LocationPhysicallyLocatableTests(
 
         from zope.location.interfaces import IRoot
 
-        class Dummy(object):
+        class Dummy:
             __parent__ = __name__ = None
         one = Dummy()
         directlyProvides(one, IRoot)
@@ -120,7 +120,7 @@ class LocationPhysicallyLocatableTests(
         self.assertEqual(proxy.getPath(), '/two/three')
 
     def test_getPath_w_cycle(self):
-        class Dummy(object):
+        class Dummy:
             __parent__ = __name__ = None
         one = Dummy()
         two = Dummy()
@@ -138,7 +138,7 @@ class LocationPhysicallyLocatableTests(
         self.assertRaises(TypeError, proxy.getParent)
 
     def test_getParent_location_but_no_IRoot(self):
-        class Dummy(object):
+        class Dummy:
             __parent__ = __name__ = None
         proxy = self._makeOne(Dummy())
         self.assertRaises(TypeError, proxy.getParent)
@@ -148,7 +148,7 @@ class LocationPhysicallyLocatableTests(
 
         from zope.location.interfaces import IRoot
 
-        class Dummy(object):
+        class Dummy:
             __parent__ = __name__ = None
         one = Dummy()
         directlyProvides(one, IRoot)
@@ -160,7 +160,7 @@ class LocationPhysicallyLocatableTests(
 
         from zope.location.interfaces import IRoot
 
-        class Dummy(object):
+        class Dummy:
             __parent__ = __name__ = None
         one = Dummy()
         directlyProvides(one, IRoot)
@@ -178,7 +178,7 @@ class LocationPhysicallyLocatableTests(
         self.assertRaises(TypeError, proxy.getParents)
 
     def test_getParents_location_but_no_IRoot(self):
-        class Dummy(object):
+        class Dummy:
             __parent__ = __name__ = None
         proxy = self._makeOne(Dummy())
         self.assertRaises(TypeError, proxy.getParents)
@@ -188,7 +188,7 @@ class LocationPhysicallyLocatableTests(
 
         from zope.location.interfaces import IRoot
 
-        class Dummy(object):
+        class Dummy:
             __parent__ = __name__ = None
         one = Dummy()
         directlyProvides(one, IRoot)
@@ -200,7 +200,7 @@ class LocationPhysicallyLocatableTests(
 
         from zope.location.interfaces import IRoot
 
-        class Dummy(object):
+        class Dummy:
             __parent__ = __name__ = None
         one = Dummy()
         directlyProvides(one, IRoot)
@@ -218,13 +218,13 @@ class LocationPhysicallyLocatableTests(
         self.assertRaises(AttributeError, proxy.getName)
 
     def test_getName_location(self):
-        class Dummy(object):
+        class Dummy:
             __name__ = None
         proxy = self._makeOne(Dummy())
         self.assertEqual(proxy.getName(), None)
 
     def test_getName_location_w_name(self):
-        class Dummy(object):
+        class Dummy:
             __name__ = 'name'
         proxy = self._makeOne(Dummy())
         self.assertEqual(proxy.getName(), 'name')
@@ -235,7 +235,7 @@ class LocationPhysicallyLocatableTests(
         from zope.location.interfaces import \
             ISite  # zope.component, if present
 
-        class Dummy(object):
+        class Dummy:
             pass
         context = Dummy()
         directlyProvides(context, ISite)
@@ -249,7 +249,7 @@ class LocationPhysicallyLocatableTests(
         from zope.location.interfaces import \
             ISite  # zope.component, if present
 
-        class Dummy(object):
+        class Dummy:
             pass
         one = Dummy()
         directlyProvides(one, (ISite, IRoot))
@@ -267,7 +267,7 @@ class LocationPhysicallyLocatableTests(
 
         from zope.location.interfaces import IRoot
 
-        class Dummy(object):
+        class Dummy:
             __parent__ = __name__ = None
         one = Dummy()
         directlyProvides(one, IRoot)
@@ -322,10 +322,3 @@ class RootPhysicallyLocatableTests(
         context = object()
         proxy = self._makeOne(context)
         self.assertTrue(proxy.getNearestSite() is context)
-
-
-def test_suite():
-    return unittest.TestSuite((
-        unittest.makeSuite(LocationPhysicallyLocatableTests),
-        unittest.makeSuite(RootPhysicallyLocatableTests),
-    ))

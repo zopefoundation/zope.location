@@ -25,7 +25,7 @@ from zope.location.interfaces import ILocation
 
 
 @implementer(ILocation)
-class Location(object):
+class Location:
     """Mix-in that implements ILocation.
 
     It provides the `__parent__` and `__name__` attributes.
@@ -72,7 +72,7 @@ def inside(l1, l2):
     return False
 
 
-class ClassAndInstanceDescr(object):
+class ClassAndInstanceDescr:
 
     def __init__(self, *args):
         self.funcs = args
