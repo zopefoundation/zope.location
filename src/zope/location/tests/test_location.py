@@ -14,7 +14,7 @@
 import unittest
 
 
-class ConformsToILocation(object):
+class ConformsToILocation:
 
     def test_class_conforms_to_ILocation(self):
         from zope.interface.verify import verifyClass
@@ -51,7 +51,7 @@ class Test_locate(unittest.TestCase):
         return locate(obj, *args, **kw)
 
     def test_wo_name(self):
-        class Dummy(object):
+        class Dummy:
             pass
         parent = Dummy()
         dummy = Dummy()
@@ -60,7 +60,7 @@ class Test_locate(unittest.TestCase):
         self.assertEqual(dummy.__name__, None)
 
     def test_w_name(self):
-        class Dummy(object):
+        class Dummy:
             pass
         parent = Dummy()
         dummy = Dummy()
@@ -81,7 +81,7 @@ class Test_located(unittest.TestCase):
         from zope.location.interfaces import ILocation
 
         @implementer(ILocation)
-        class Dummy(object):
+        class Dummy:
             __parent__ = None
             __name__ = object()
         parent = Dummy()
@@ -100,7 +100,7 @@ class Test_located(unittest.TestCase):
             _hooked.append((iface, obj))
             return obj
 
-        class Dummy(object):
+        class Dummy:
             pass
         parent = Dummy()
         dummy = Dummy()
@@ -116,7 +116,7 @@ class Test_located(unittest.TestCase):
         self.assertEqual(_hooked[0], (ILocation, dummy))
 
     def test_wo_name_not_adaptable_to_ILocation(self):
-        class Dummy(object):
+        class Dummy:
             __parent__ = None
             __name__ = 'before'
         parent = Dummy()
@@ -140,14 +140,14 @@ class Test_LocationIterator(unittest.TestCase):
         self.assertEqual(list(self._callFUT(island)), [island])
 
     def test_w_isolated_location_object(self):
-        class Dummy(object):
+        class Dummy:
             __parent__ = None
             __name__ = 'before'
         island = Dummy()
         self.assertEqual(list(self._callFUT(island)), [island])
 
     def test_w_nested_location_object(self):
-        class Dummy(object):
+        class Dummy:
             __parent__ = None
             __name__ = 'before'
         parent = Dummy()
@@ -173,7 +173,7 @@ class Test_inside(unittest.TestCase):
         self.assertTrue(self._callFUT(atoll, atoll))
 
     def test_w_isolated_location_objects(self):
-        class Dummy(object):
+        class Dummy:
             __parent__ = None
             __name__ = 'before'
         island = Dummy()
@@ -184,7 +184,7 @@ class Test_inside(unittest.TestCase):
         self.assertTrue(self._callFUT(atoll, atoll))
 
     def test_w_nested_location_object(self):
-        class Dummy(object):
+        class Dummy:
             __parent__ = None
             __name__ = 'before'
         parent = Dummy()
@@ -223,7 +223,7 @@ class ClassAndInstanceDescrTests(unittest.TestCase):
             _class_called.append((args, kw))
             return 'CLASS'
 
-        class Foo(object):
+        class Foo:
             descr = self._makeOne(_inst, _class)
         return Foo, _class_called, _inst_called
 
@@ -273,14 +273,14 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
         self.assertEqual(proxy.__name__, 'name')
 
     def test___getattribute___wrapped(self):
-        class Context(object):
+        class Context:
             attr = 'ATTR'
         context = Context()
         proxy = self._makeOne(context)
         self.assertEqual(proxy.attr, 'ATTR')
 
     def test___setattr___wrapped(self):
-        class Context(object):
+        class Context:
             attr = 'BEFORE'
         context = Context()
         proxy = self._makeOne(context)
@@ -295,13 +295,13 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
         self.assertEqual(Derived.__doc__, 'DERIVED')
 
     def test___doc___from_target_class(self):
-        class Context(object):
+        class Context:
             """CONTEXT"""
         proxy = self._makeOne(Context())
         self.assertEqual(proxy.__doc__, 'CONTEXT')
 
     def test___doc___from_target_instance(self):
-        class Context(object):
+        class Context:
             """CONTEXT"""
         context = Context()
         context.__doc__ = 'INSTANCE'
@@ -319,7 +319,7 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
     def test___reduce___via_pickling(self):
         import pickle
 
-        class Context(object):
+        class Context:
             def __reduce__(self):
                 raise AssertionError("This is not called")
         proxy = self._makeOne(Context())
@@ -373,7 +373,7 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
 
         @provider(IContextFactory)
         @implementer(IContext)
-        class Context(object):
+        class Context:
             pass
         context = Context()
         proxy = Proxy(context)

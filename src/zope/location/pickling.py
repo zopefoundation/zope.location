@@ -29,7 +29,7 @@ except ImportError:  # pragma: no cover
 
 
 @implementer(ICopyHook)
-class LocationCopyHook(object):
+class LocationCopyHook:
     """Copy hook to preserve copying referenced objects that are not
     located inside object that's being copied.
     """

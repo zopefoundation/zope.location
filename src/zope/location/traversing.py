@@ -23,7 +23,7 @@ from zope.location.interfaces import ISite  # zope.component, if present
 
 
 @implementer(ILocationInfo)
-class LocationPhysicallyLocatable(object):
+class LocationPhysicallyLocatable:
     """Provide location information for location objects
     """
 
@@ -57,8 +57,8 @@ class LocationPhysicallyLocatable(object):
                 if path:
                     path.append('')
                     path.reverse()
-                    return u'/'.join(path)
-                return u'/'
+                    return '/'.join(path)
+                return '/'
             path.append(context.__name__)
             context = context.__parent__
             max -= 1
@@ -113,7 +113,7 @@ class LocationPhysicallyLocatable(object):
 
 
 @implementer(ILocationInfo)
-class RootPhysicallyLocatable(object):
+class RootPhysicallyLocatable:
     """Provide location information for the root object
 
     This adapter is very simple, because there's no places to search
@@ -132,7 +132,7 @@ class RootPhysicallyLocatable(object):
     def getPath(self):
         """See ILocationInfo
         """
-        return u'/'
+        return '/'
 
     def getParent(self):
         """See ILocationInfo.
@@ -147,7 +147,7 @@ class RootPhysicallyLocatable(object):
     def getName(self):
         """See ILocationInfo
         """
-        return u''
+        return ''
 
     def getNearestSite(self):
         """See ILocationInfo

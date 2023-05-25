@@ -41,9 +41,9 @@ class ILocation(Interface):
     __parent__ = Attribute("The parent in the location hierarchy.")
 
     __name__ = TextLine(
-        title=(u"The name within the parent"),
-        description=(u"The object can be looked up from the parent's "
-                     u"sublocations using this name."),
+        title=("The name within the parent"),
+        description=("The object can be looked up from the parent's "
+                     "sublocations using this name."),
         required=False,
         default=None)
 

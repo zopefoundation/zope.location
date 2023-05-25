@@ -38,7 +38,7 @@ class LocationCopyHookTests(unittest.TestCase):
     def test___call___w_context_inside_toplevel(self):
         from zope.copy.interfaces import ResumeCopy
 
-        class Dummy(object):
+        class Dummy:
             __parent__ = __name__ = None
         top_level = Dummy()
         context = Dummy()
@@ -47,7 +47,7 @@ class LocationCopyHookTests(unittest.TestCase):
         self.assertRaises(ResumeCopy, hook, top_level, object())
 
     def test___call___w_context_outside_toplevel(self):
-        class Dummy(object):
+        class Dummy:
             __parent__ = __name__ = None
         top_level = Dummy()
         context = Dummy()
