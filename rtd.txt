@@ -1,7 +1,0 @@
-repoze.sphinx.autointerface
-zope.configuration
-zope.component
-zope.copy
-zope.interface
-zope.proxy
-zope.schema
