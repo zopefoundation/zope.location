@@ -20,10 +20,10 @@
         :target: http://zopelocation.readthedocs.org/en/latest/
         :alt: Documentation Status
 
-In Zope 3, "locations" are special objects that have a structural
+In Zope 3, "locations" are special objects, that have a structural
 location, indicated with ``__name__`` and ``__parent__`` attributes.
 
 See `zope.container <https://zopecontainer.readthedocs.io/en/latest>`_
-for a useful extension of this concept to "containers."
+for a useful extension of this concept to "containers".
 
-Documentation is hosted at https://zopelocation.readthedocs.io/en/latest/
+Documentation is hosted at https://zopelocation.readthedocs.io/
