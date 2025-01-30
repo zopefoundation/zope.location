@@ -13,7 +13,10 @@
 ##############################################################################
 import unittest
 
+from zope.location.testing import skipUnlessImportable
 
+
+@skipUnlessImportable('zope.copy')
 class LocationCopyHookTests(unittest.TestCase):
 
     def _getTargetClass(self):

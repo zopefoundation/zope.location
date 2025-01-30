@@ -37,8 +37,11 @@ COMPONENT_REQUIRES = [
     'zope.component >= 4.0.1',
 ]
 
-TESTS_REQUIRE = ZCML_REQUIRES + COMPONENT_REQUIRES + [
+COPY_REQUIRES = [
     'zope.copy >= 4.0',
+]
+
+TESTS_REQUIRE = [
     'zope.testrunner',
 ]
 
@@ -57,7 +60,7 @@ setup(name='zope.location',
           + '\n\n' +
           read('CHANGES.rst')
       ),
-      license='ZPL 2.1',
+      license='ZPL-2.1',
       keywords=('zope location structural'),
       classifiers=[
           'Development Status :: 5 - Production/Stable',
@@ -93,7 +96,15 @@ setup(name='zope.location',
       extras_require={
           'zcml': ZCML_REQUIRES,
           'component': COMPONENT_REQUIRES,
-          'test': TESTS_REQUIRE,
+          'copy': COPY_REQUIRES,
+          'test-minimal': TESTS_REQUIRE,
+          'test-component': TESTS_REQUIRE + COMPONENT_REQUIRES + ZCML_REQUIRES,
+          'test': (
+              TESTS_REQUIRE
+              + ZCML_REQUIRES
+              + COMPONENT_REQUIRES
+              + COPY_REQUIRES
+          ),
           'docs': DOCS_REQUIRE,
       },
       include_package_data=True,

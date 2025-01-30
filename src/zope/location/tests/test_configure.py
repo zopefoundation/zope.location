@@ -15,12 +15,22 @@
 """
 import unittest
 
+from zope.location.testing import skipUnlessImportable
 
+
+@skipUnlessImportable('zope.component')
 class Test_ZCML_loads(unittest.TestCase):
 
     def test_it(self):
         import zope.component  # no registrations made if not present
-        ADAPTERS_REGISTERED = 4
+
+        try:
+            import zope.copy
+            ADAPTERS_REGISTERED = 4
+        except ModuleNotFoundError:  # pragma: no cover
+            ADAPTERS_REGISTERED = 3
+        else:
+            del zope.copy
         from zope.configuration.xmlconfig import XMLConfig
         from zope.configuration.xmlconfig import _clearContext
         from zope.configuration.xmlconfig import _getContext

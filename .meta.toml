@@ -2,7 +2,7 @@
 # https://github.com/zopefoundation/meta/tree/master/config/pure-python
 [meta]
 template = "pure-python"
-commit-id = "75c6251b"
+commit-id = "0754ed06"
 
 [python]
 with-macos = false
@@ -14,6 +14,20 @@ with-sphinx-doctests = true
 
 [tox]
 use-flake8 = true
+additional-envlist = [
+    "py311-minimal",
+    "py311-component",
+]
+testenv-additional = [
+    "",
+    "[testenv:py311-minimal]",
+    "extras = test-minimal",
+    "commands = zope-testrunner --test-path=src {posargs:-vc}",
+    "",
+    "[testenv:py311-component]",
+    "extras = test-component",
+    "commands = zope-testrunner --test-path=src {posargs:-vc}",
+]
 
 [coverage]
 fail-under = 100
