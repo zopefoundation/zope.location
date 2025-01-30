@@ -23,7 +23,7 @@ from zope.location.location import inside
 try:
     from zope.copy.interfaces import ICopyHook
     from zope.copy.interfaces import ResumeCopy
-except ImportError:  # pragma: no cover
+except ModuleNotFoundError:  # pragma: no cover
     raise NotImplementedError("zope.location.pickling is not supported "
                               "because zope.copy is not available")
 

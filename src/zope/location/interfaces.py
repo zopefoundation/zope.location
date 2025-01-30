@@ -130,6 +130,6 @@ class LocationError(KeyError, LookupError):
 # backward-compatibility
 try:
     from zope.component.interfaces import ISite
-except ImportError:  # pragma: no cover
+except ModuleNotFoundError:  # pragma: no cover
     class ISite(Interface):
         pass

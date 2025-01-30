@@ -56,7 +56,7 @@ class Test_locate(unittest.TestCase):
         parent = Dummy()
         dummy = Dummy()
         self._callFUT(dummy, parent)
-        self.assertTrue(dummy.__parent__ is parent)
+        self.assertIs(dummy.__parent__, parent)
         self.assertEqual(dummy.__name__, None)
 
     def test_w_name(self):
@@ -65,7 +65,7 @@ class Test_locate(unittest.TestCase):
         parent = Dummy()
         dummy = Dummy()
         self._callFUT(dummy, parent, 'name')
-        self.assertTrue(dummy.__parent__ is parent)
+        self.assertIs(dummy.__parent__, parent)
         self.assertEqual(dummy.__name__, 'name')
 
 
@@ -87,7 +87,7 @@ class Test_located(unittest.TestCase):
         parent = Dummy()
         dummy = Dummy()
         self._callFUT(dummy, parent)
-        self.assertTrue(dummy.__parent__ is parent)
+        self.assertIs(dummy.__parent__, parent)
         self.assertEqual(dummy.__name__, None)
 
     def test_w_name_adaptable_to_ILocation(self):
@@ -110,7 +110,7 @@ class Test_located(unittest.TestCase):
             self._callFUT(dummy, parent, 'name')
         finally:
             adapter_hooks[:] = before
-        self.assertTrue(dummy.__parent__ is parent)
+        self.assertIs(dummy.__parent__, parent)
         self.assertEqual(dummy.__name__, 'name')
         self.assertEqual(len(_hooked), 1)
         self.assertEqual(_hooked[0], (ILocation, dummy))
@@ -269,7 +269,7 @@ class LocationProxyTests(unittest.TestCase, ConformsToILocation):
         dummy = object()  # can't setattr
         parent = object()
         proxy = self._makeOne(dummy, parent, 'name')
-        self.assertTrue(proxy.__parent__ is parent)
+        self.assertIs(proxy.__parent__, parent)
         self.assertEqual(proxy.__name__, 'name')
 
     def test___getattribute___wrapped(self):

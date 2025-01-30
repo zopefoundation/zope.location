@@ -52,7 +52,7 @@ class LocationCopyHookTests(unittest.TestCase):
         top_level = Dummy()
         context = Dummy()
         hook = self._makeOne(context)
-        self.assertTrue(hook(top_level, object()) is context)
+        self.assertIs(hook(top_level, object()), context)
 
 
 def test_suite():

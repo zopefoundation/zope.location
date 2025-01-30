@@ -65,7 +65,7 @@ class LocationPhysicallyLocatableTests(
         three = Dummy()
         three.__parent__ = two
         proxy = self._makeOne(three)
-        self.assertTrue(proxy.getRoot() is one)
+        self.assertIs(proxy.getRoot(), one)
 
     def test_getRoot_w_cycle(self):
         class Dummy:
@@ -171,7 +171,7 @@ class LocationPhysicallyLocatableTests(
         three.__parent__ = two
         three.__name__ = 'three'
         proxy = self._makeOne(three)
-        self.assertTrue(proxy.getParent() is two)
+        self.assertIs(proxy.getParent(), two)
 
     def test_getParents_not_location_aware(self):
         proxy = self._makeOne(object())
@@ -240,7 +240,7 @@ class LocationPhysicallyLocatableTests(
         context = Dummy()
         directlyProvides(context, ISite)
         proxy = self._makeOne(context)
-        self.assertTrue(proxy.getNearestSite() is context)
+        self.assertIs(proxy.getNearestSite(), context)
 
     def test_getNearestSite_ancestor_is_site(self):
         from zope.interface import directlyProvides
@@ -260,7 +260,7 @@ class LocationPhysicallyLocatableTests(
         three.__parent__ = two
         three.__name__ = 'three'
         proxy = self._makeOne(three)
-        self.assertTrue(proxy.getNearestSite() is one)
+        self.assertIs(proxy.getNearestSite(), one)
 
     def test_getNearestSite_no_site(self):
         from zope.interface import directlyProvides
@@ -278,7 +278,7 @@ class LocationPhysicallyLocatableTests(
         three.__parent__ = two
         three.__name__ = 'three'
         proxy = self._makeOne(three)
-        self.assertTrue(proxy.getNearestSite() is one)
+        self.assertIs(proxy.getNearestSite(), one)
 
 
 class RootPhysicallyLocatableTests(
@@ -296,7 +296,7 @@ class RootPhysicallyLocatableTests(
     def test_getRoot(self):
         context = object()
         proxy = self._makeOne(context)
-        self.assertTrue(proxy.getRoot() is context)
+        self.assertIs(proxy.getRoot(), context)
 
     def test_getPath(self):
         context = object()
@@ -321,4 +321,4 @@ class RootPhysicallyLocatableTests(
     def test_getNearestSite(self):
         context = object()
         proxy = self._makeOne(context)
-        self.assertTrue(proxy.getNearestSite() is context)
+        self.assertIs(proxy.getNearestSite(), context)
