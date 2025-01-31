@@ -9,6 +9,9 @@
 
 - Drop support for Python 3.7, 3.8.
 
+- Add tests for minimal dependencies.
+
+- Add ``copy`` extra to include the ``zope.copy`` dependency.
 
 5.0 (2023-05-25)
 ================
