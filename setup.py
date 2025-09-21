@@ -61,7 +61,6 @@ setup(
     url='http://github.com/zopefoundation/zope.location/',
     python_requires='>=3.9',
     install_requires=[
-        'setuptools',
         'zope.interface>=4.0.2',
         'zope.schema>=4.2.2',
         'zope.proxy>=4.0.1',
