@@ -67,7 +67,7 @@ Then, you canrun the tests using the build-in ``setuptools`` testrunner:
    ...............................................................................
    ----------------------------------------------------------------------
    Ran 83 tests in 0.037s
-   
+
    OK
 
 If you have the :mod:`nose` package installed in the virtualenv, you can
@@ -79,7 +79,7 @@ use its testrunner too:
    .......................................................................................
    ----------------------------------------------------------------------
    Ran 87 tests in 0.037s
-   
+
    OK
 
 If you have the :mod:`coverage` pacakge installed in the virtualenv,
@@ -93,14 +93,14 @@ you can see how well the tests cover the code:
    .......................................................................................
    Name                       Stmts   Miss  Cover   Missing
    --------------------------------------------------------
-   zope.location                  5      0   100%   
-   zope.location._compat          2      0   100%   
-   zope.location.interfaces      23      0   100%   
-   zope.location.location        61      0   100%   
-   zope.location.pickling        14      0   100%   
-   zope.location.traversing      80      0   100%   
+   zope.location                  5      0   100%
+   zope.location._compat          2      0   100%
+   zope.location.interfaces      23      0   100%
+   zope.location.location        61      0   100%
+   zope.location.pickling        14      0   100%
+   zope.location.traversing      80      0   100%
    --------------------------------------------------------
-   TOTAL                        185      0   100%   
+   TOTAL                        185      0   100%
    ----------------------------------------------------------------------
    Ran 87 tests in 0.315s
 
@@ -146,7 +146,7 @@ You can also test the code snippets in the documentation:
        0 failures in cleanup code
    build succeeded.
    Testing of doctests in the sources finished, look at the  results in _build/doctest/output.txt.
-   
+
 
 
 Using :mod:`zc.buildout`
@@ -195,7 +195,7 @@ tool designed to run tests against multiple Python versions.  It creates
 a ``virtualenv`` for each configured version, installs the current package
 and configured dependencies into each ``virtualenv``, and then runs the
 configured commands.
-   
+
 :mod:`zope.location` configures the following :mod:`tox` environments via
 its ``tox.ini`` file:
 
@@ -235,7 +235,7 @@ as well as installing ``tox``:
    ___________________________________ summary ____________________________________
      py26: commands succeeded
      congratulations :)
-   
+
 
 Running ``tox`` with no arguments runs all the configured environments,
 including building the docs and testing their snippets:
